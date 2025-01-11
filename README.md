@@ -3,7 +3,7 @@
 Popup a notification with the current song playing in spotify.
 
 There are many other Spotify-based plugins with other features including commands to control
-the player... all I want is a single notification.
+the player... all I want is a single notification when a new song plays.
 
 # Usage
 
