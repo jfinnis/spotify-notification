@@ -19,7 +19,9 @@ vim.api.nvim_create_autocmd({'FocusGained', 'FocusLost'}, {
 --- Check for song info changes but only notify into the active Neovim session.
 local function notify_song_info()
     if is_focused then
-        local file = vim.fn.stdpath 'config' .. '/scripts/now-playing.sh'
+        local file = vim.fn.stdpath 'config'
+            .. '/lua/plugins/spotify-notification.nvim/lua/spotify-notification/scripts/'
+            .. 'now-playing.sh'
         local song_info = vim.trim(vim.fn.system('bash ' .. vim.fn.shellescape(file)))
 
         if song_info ~= last_song_info then
