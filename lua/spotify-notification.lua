@@ -19,9 +19,9 @@ vim.api.nvim_create_autocmd({'FocusGained', 'FocusLost'}, {
 --- Check for song info changes but only notify into the active Neovim session.
 local function notify_song_info()
     if is_focused then
-        local file = vim.fn.stdpath 'config'
-            .. '/lua/plugins/spotify-notification/lua/spotify-notification/scripts/'
-            .. 'now-playing.sh'
+        local file = vim.fn.stdpath 'data'
+            .. '/lazy/spotify-notification.nvim/lua/scripts/'
+            .. 'now_playing.sh'
         local song_info = vim.trim(vim.fn.system('bash ' .. vim.fn.shellescape(file)))
 
         if song_info ~= last_song_info then
@@ -57,8 +57,3 @@ M.is_running = function()
 end
 
 return M
-
-
--- TODO: provide commands to start and stop polling
--- maybe zenmode pauses the polling
--- toggle and restore?
