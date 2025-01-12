@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({'FocusGained', 'FocusLost'}, {
 local function notify_song_info()
     if is_focused then
         local file = vim.fn.stdpath 'config'
-            .. '/lua/plugins/spotify-notification.nvim/lua/spotify-notification/scripts/'
+            .. '/lua/plugins/spotify-notification/lua/spotify-notification/scripts/'
             .. 'now-playing.sh'
         local song_info = vim.trim(vim.fn.system('bash ' .. vim.fn.shellescape(file)))
 
