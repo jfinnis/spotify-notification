@@ -7,7 +7,7 @@ local is_timer_running = false
 local function notify_song_info()
     if require('spotify-notification.config').is_focused() then
         local file = vim.fn.stdpath 'data'
-            .. '/lazy/spotify-notification.nvim/lua/scripts/'
+            .. '/lazy/spotify-notification.nvim/lua/spotify-notification/scripts/'
             .. 'now_playing.sh'
         local song_info = vim.trim(vim.fn.system('bash ' .. vim.fn.shellescape(file)))
         if song_info ~= last_song_info then
