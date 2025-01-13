@@ -1,29 +1,15 @@
-local M = { }
+local M = {}
 
-local is_focused = true
-local is_timer_running = false
 local last_song_info = nil
-
--- Keep track of the instance of nvim that is focused so we don't have background instances
--- calling scripts unnecessarily.
-vim.api.nvim_create_autocmd({'FocusGained', 'FocusLost'}, {
-    callback = function(event)
-        if event.event == 'FocusGained' then
-            is_focused = true
-        else
-            is_focused = false
-        end
-    end
-})
+local is_timer_running = false
 
 --- Check for song info changes but only notify into the active Neovim session.
 local function notify_song_info()
-    if is_focused then
+    if require('spotify-notification.config').is_focused() then
         local file = vim.fn.stdpath 'data'
             .. '/lazy/spotify-notification.nvim/lua/scripts/'
             .. 'now_playing.sh'
         local song_info = vim.trim(vim.fn.system('bash ' .. vim.fn.shellescape(file)))
-
         if song_info ~= last_song_info then
             vim.notify(song_info, vim.log.levels.INFO, { title = 'Spotify' })
             last_song_info = song_info
@@ -31,23 +17,34 @@ local function notify_song_info()
     end
 end
 
---- Polling for song info changes every 3 seconds.
 local timer = nil
-M.start_polling = function()
+
+--- Polling for song info changes every 3 seconds.
+---@param debug? boolean
+function M.start_polling(debug)
+    debug = debug or false
+
     timer = timer or vim.loop.new_timer()
-    timer:start(0, 3000, vim.schedule_wrap(notify_song_info))
+    timer:start(0, 5000, vim.schedule_wrap(notify_song_info))
     is_timer_running = true
-    vim.notify('Spotify Notification Started', vim.log.levels.INFO, { title = 'Spotify' })
+    if debug then
+        vim.notify('Spotify Notification Started', vim.log.levels.INFO, { title = 'Spotify' })
+    end
 end
 
-M.stop_polling = function()
+---@param debug? boolean
+function M.stop_polling(debug)
+    debug = debug or false
+
     timer:stop()
     timer:close()
     is_timer_running = false
-    vim.notify('Spotify Notification Stopped', vim.log.levels.INFO, { title = 'Spotify' })
+    if debug then
+        vim.notify('Spotify Notification Stopped', vim.log.levels.INFO, { title = 'Spotify' })
+    end
 end
 
-M.is_running = function()
+function M.is_running()
     vim.notify(
         'Spotify Notification is ' .. (is_timer_running and 'on' or 'off'),
         vim.log.levels.INFO,
