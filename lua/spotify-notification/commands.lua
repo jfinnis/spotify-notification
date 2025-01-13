@@ -39,6 +39,7 @@ function M.stop_polling(debug)
     timer:stop()
     timer:close()
     timer = nil
+    last_song_info = nil
     is_timer_running = false
     if debug then
         vim.notify('Spotify Notification Stopped', vim.log.levels.INFO, { title = 'Spotify' })
