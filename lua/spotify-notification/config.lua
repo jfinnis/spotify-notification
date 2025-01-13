@@ -29,7 +29,7 @@ function M.setup(opts)
     end, {})
 
     vim.api.nvim_create_user_command('SpotifyNotifRunning', function()
-        require('spotify-notification.commands').is_running()
+        require('spotify-notification.commands').is_running(options.debug)
     end, {})
 
     -- call with schedule?

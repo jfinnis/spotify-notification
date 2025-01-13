@@ -46,12 +46,15 @@ function M.stop_polling(debug)
     end
 end
 
-function M.is_running()
-    vim.notify(
-        'Spotify Notification is ' .. (is_timer_running and 'on' or 'off'),
-        vim.log.levels.INFO,
-        { title = 'Spotify' }
-    )
+---@param debug? boolean
+function M.is_running(debug)
+    if debug then
+        vim.notify(
+            'Spotify Notification is ' .. (is_timer_running and 'on' or 'off'),
+            vim.log.levels.INFO,
+            { title = 'Spotify' }
+        )
+    end
     return is_timer_running
 end
 
