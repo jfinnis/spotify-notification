@@ -12,7 +12,7 @@ if application "Spotify" is running
     end if
     set currentArtist to artist of current track as string
     set currentTrack to name of current track as string
-    return "♪ " & currentTrack & " - " & currentArtist & " ♪"
+    return "♪ " & currentArtist & " - " & currentTrack & " ♪"
   end tell
 else
   return "Spotify is not running"
