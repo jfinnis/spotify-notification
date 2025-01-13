@@ -1,14 +1,20 @@
 # `spotify-notification.nvim`
 
-Popup a notification with the current song playing in spotify.
+Popup a notification every time the Spotify song changes.
 
-There are many other Spotify-based plugins with other features including commands to control
-the player... all I want is a single notification when a new song plays.
+There are many other Spotify-based plugins that include extra features like Spotify controls...
+All I want is a single notification when a new song plays.
 
-# Usage
+## Installation/Configuration
 
-No configuration or keymaps required.
-
+```lua
+{
+    'jfinnis/spotify-notification.nvim',
+    opts = {
+        debug = false -- Show message when starting/stopping notifications
+    },
+}
+```
 ## Commands
 
 `SpotifyNotifStart`: Start the notifications

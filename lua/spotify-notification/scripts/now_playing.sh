@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Use applescript to talk to spotify
+# Example from: https://github.com/spinalshock/spotify.nvim
 osascript <<EOF
 if application "Spotify" is running
   tell application "Spotify"
